@@ -303,8 +303,7 @@ if __name__ == '__main__':
     # 添加命令行参数
     parser.add_argument('--times', type=int, help='爬取次数', default=50)
     parser.add_argument('--sleeps', type=int, help='爬取一页后等待时间，单位秒', default=3)
-    parser.add_argument('--cookie', type=str,
-                        help='用户 cookies')
+    parser.add_argument('--cookie', type=str, help='用户 cookies')
     parser.add_argument('--output', type=str,
                         help='结果保存目录', default='./output/toutiao_v2')
     parser.add_argument('--notion_token', type=str,
@@ -315,6 +314,8 @@ if __name__ == '__main__':
                         help='notion 文章数量', default=300)
 
     parser.add_argument('--mongo_url', type=str)
+    parser.add_argument('--mongo_username', type=str)
+    parser.add_argument('--mongo_password', type=str)
     parser.add_argument('--mongo_db', type=str, default='zmt_crawler')
     parser.add_argument('--mongo_collection', type=str, default='articles')
     parser.add_argument('--filter', type=str, help='过滤的用户',
@@ -330,14 +331,17 @@ if __name__ == '__main__':
     notion_url = args.notion_url
     notion_articles = args.notion_articles
     mongo_url = args.mongo_url
+    mongo_username = args.mongo_username
+    mongo_password = args.mongo_password
     mongo_db = args.mongo_db
     mongo_collection = args.mongo_collection
 
     filter_name = args.filter
 
-    print(f">>>>>>>>>>>> output: {output}")
+    # print(f">>>>>>>>>>>> output: {output}")
 
     articles = get_articles(times, sleeps, cookie, filter_name)
+    mongon_uri = f"mongodb+srv://{mongo_username}:{mongo_password}@{mongo_url}/?retryWrites=true&w=majority"
     save_artices_to_mogono(articles, mongo_url, mongo_db, mongo_collection)
     # df = save_articles_to_file(articles, output)
 
