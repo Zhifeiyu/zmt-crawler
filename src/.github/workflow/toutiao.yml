@@ -27,4 +27,4 @@ jobs:
 
       - name: run toutiao crawler
         run: |
-          python toutiao_crawler.py --times ${{ vars.CRAWLER_TIMES }} --sleeps ${{ vars.CRAWLER_SLEEPS }} --mongo_url ${{ secrets.MONGO_URL}} --cookie "${{ secrets.CRAWLER_COOKIE}}" 
+          python ./src/toutiao_crawler.py --times ${{ vars.CRAWLER_TIMES }} --sleeps ${{ vars.CRAWLER_SLEEPS }} --mongo_url ${{ secrets.MONGO_URL}} --cookie "${{ secrets.CRAWLER_COOKIE}}" 
