@@ -286,8 +286,8 @@ def save_articles_to_notion(df, notion_token, notion_url, limit):
                      api_key=notion_token, title_col='标题', schema=get_schema_article())
 
 
-def save_artices_to_mogono(articles, mongo_url, mongo_db, mongo_collection):
-    client = MongoClient(mongo_url)
+def save_artices_to_mogono(articles, mongo_uri, mongo_db, mongo_collection):
+    client = MongoClient(mongo_uri)
     db = client[mongo_db]
     collection = db[mongo_collection]
     for article in articles:
@@ -340,8 +340,9 @@ if __name__ == '__main__':
 
     # print(f">>>>>>>>>>>> output: {output}")
 
-    articles = get_articles(times, sleeps, cookie, filter_name)
     mongon_uri = f"mongodb+srv://{mongo_username}:{mongo_password}@{mongo_url}/?retryWrites=true&w=majority"
+    # print(f">>>>>>>>>>>>>>>>> mongon_uri: {mongon_uri}")
+    articles = get_articles(times, sleeps, cookie, filter_name)
     save_artices_to_mogono(articles, mongon_uri, mongo_db, mongo_collection)
     # df = save_articles_to_file(articles, output)
 
