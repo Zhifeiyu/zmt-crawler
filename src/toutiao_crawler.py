@@ -342,7 +342,7 @@ if __name__ == '__main__':
 
     articles = get_articles(times, sleeps, cookie, filter_name)
     mongon_uri = f"mongodb+srv://{mongo_username}:{mongo_password}@{mongo_url}/?retryWrites=true&w=majority"
-    save_artices_to_mogono(articles, mongo_url, mongo_db, mongo_collection)
+    save_artices_to_mogono(articles, mongon_uri, mongo_db, mongo_collection)
     # df = save_articles_to_file(articles, output)
 
     # if ((notion_token != '') & (notion_url != '')):
