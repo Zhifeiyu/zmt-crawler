@@ -1,4 +1,4 @@
-name: ZMT Crawler
+name: toutiao crawler
 
 on:
   workflow_dispatch:
@@ -27,4 +27,4 @@ jobs:
 
       - name: run toutiao crawler
         run: |
-          python ./src/toutiao_crawler.py --times ${{ vars.CRAWLER_TIMES }} --sleeps ${{ vars.CRAWLER_SLEEPS }} --mongo_url ${{ secrets.MONGO_URL}} --cookie "${{ secrets.CRAWLER_COOKIE}}" 
+          python ./src/toutiao_crawler.py --times ${{ vars.CRAWLER_TIMES }} --sleeps ${{ vars.CRAWLER_SLEEPS }} --mongo_url ${{ vars.MONGO_URL}} --mongo_username ${{ vars.MONGO_USERNAME}} --mongo_password ${{ vars.MONGO_PASSWORD}} --cookie "${{ secrets.CRAWLER_COOKIE}}" 
