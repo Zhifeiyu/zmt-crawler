@@ -1,4 +1,4 @@
-name: ZMT Crawler
+name: toutiao crawler
 
 on:
   workflow_dispatch:
