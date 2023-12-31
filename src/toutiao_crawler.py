@@ -294,6 +294,14 @@ def save_artices_to_mogono(articles, mongo_uri, mongo_db, mongo_collection):
         if article['item_id'] is not None:
             collection.replace_one(
                 {'_id': article['item_id']}, article, upsert=True)
+    
+    current_date = datetime.now()  # 当前日期和时间
+    target_date = current_date - timedelta(days=10)  # 目标日期（当前日期减去10天）
+    query = {"publish_date": {"$lt": target_date}}
+    result = collection.delete_many(query)
+    print(f"Deleted {result.deleted_count} documents.")
+
+
 
 
 if __name__ == '__main__':
