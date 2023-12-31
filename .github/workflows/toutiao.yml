@@ -30,4 +30,4 @@ jobs:
           python ./src/toutiao_crawler.py --times ${{ vars.CRAWLER_TIMES }} --sleeps ${{ vars.CRAWLER_SLEEPS }} --mongo_url ${{ secrets.MONGO_URL}} --mongo_username ${{ secrets.MONGO_USERNAME}} --mongo_password ${{ secrets.MONGO_PASSWORD}} --cookie "${{ secrets.CRAWLER_COOKIE}}" 
       - name: run toutiao crawler
         run: |
-          python ./src/toutiao_crawler.py --times ${{ vars.CRAWLER_TIMES }} --sleeps ${{ vars.CRAWLER_SLEEPS }} --mongo_url ${{ secrets.MONGO_URL}} --mongo_collection  ${{ vars.MONGO_DB_PXC}}  --mongo_username ${{ secrets.MONGO_USERNAME}} --mongo_password ${{ secrets.MONGO_PASSWORD}} --cookie "${{ secrets.CRAWLER_COOKIE}}"
+          python ./src/toutiao_crawler.py --times ${{ vars.CRAWLER_TIMES }} --sleeps ${{ vars.CRAWLER_SLEEPS }} --mongo_url ${{ secrets.MONGO_URL}} --mongo_collection  ${{ vars.MONGO_DB_PXC}}  --mongo_username ${{ secrets.MONGO_USERNAME}} --mongo_password ${{ secrets.MONGO_PASSWORD}} --cookie "${{ secrets.CRAWLER_COOKIE_PXC}}"
