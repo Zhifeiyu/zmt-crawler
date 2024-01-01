@@ -43,6 +43,7 @@ if __name__ == "__main__":
     collect_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
     for article in articles:
         article['collect_time'] = collect_time
+        article['_id'] = article['item_id'] + article['collect_time']
     
     mongon_uri = f"mongodb+srv://{mongo_username}:{mongo_password}@{mongo_url}/?retryWrites=true&w=majority"
     toutiao_utils.save_artices_to_mogono(articles, mongon_uri, mongo_db, mongo_collection, True, 10)
