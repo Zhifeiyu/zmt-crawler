@@ -27,7 +27,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     times = args.times
     sleeps = args.sleeps
-    cookie = args.cookies
+    cookie = args.cookie
     token = args.token
     signature = args.signature
     mongo_url = args.mongo_url
