@@ -131,4 +131,4 @@ if __name__ == '__main__':
     filter_name = args.filter
     mongon_uri = f"mongodb+srv://{mongo_username}:{mongo_password}@{mongo_url}/?retryWrites=true&w=majority"
     articles = toutiao_utils.get_articles(times, sleeps, cookie, filter_name)
-    toutiao_utils.save_artices_to_mogono(articles, mongon_uri, mongo_db, mongo_collection)
+    toutiao_utils.save_artices_to_mogono(articles, mongon_uri, mongo_db, mongo_collection, True, 10)

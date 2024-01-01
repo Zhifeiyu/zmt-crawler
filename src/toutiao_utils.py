@@ -266,7 +266,7 @@ def get_user_articles(times, sleeps, cookie, token, signature):
     return articles
     
     
-def save_artices_to_mogono(articles, mongo_uri, mongo_db, mongo_collection):
+def save_artices_to_mogono(articles, mongo_uri, mongo_db, mongo_collection, delete_old_data=False, delete_old_data_days=10):
     client = MongoClient(mongo_uri)
     db = client[mongo_db]
     collection = db[mongo_collection]
@@ -275,8 +275,10 @@ def save_artices_to_mogono(articles, mongo_uri, mongo_db, mongo_collection):
             collection.replace_one(
                 {'_id': article['item_id']}, article, upsert=True)
 
-    current_date = datetime.now()  # 当前日期和时间
-    target_date = current_date - timedelta(days=10)  # 目标日期（当前日期减去10天）
-    query = {"publish_date": {"$lt": target_date}}
-    result = collection.delete_many(query)
-    print(f"Deleted {result.deleted_count} documents.")
+    ## 删除过期数据
+    if delete_old_data:
+        current_date = datetime.now()  # 当前日期和时间
+        target_date = current_date - timedelta(days=delete_old_data_days)  # 目标日期（当前日期减去10天）
+        query = {"publish_date": {"$lt": target_date}}
+        result = collection.delete_many(query)
+        print(f"Deleted {result.deleted_count} documents.")
