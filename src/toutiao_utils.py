@@ -231,13 +231,16 @@ def get_user_articles(times, sleeps, cookie, token, signature):
     
     articles = []
     max_behot_time = 0
+    has_more = True
     for i in range(0, times):
         feed_url = get_user_feed_url(token, max_behot_time, signature)
         print(
             f">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start {i}, feed_url: {feed_url}")
         respons = requests.get(url=feed_url, headers=headers)
-        print(respons)
-        data = json.loads(respons.content).get('data')
+        content = json.loads(respons.content)
+        data = content.get('data')
+        max_behot_time = content.get('next').get('max_behot_time')
+        has_more = content.get('has_more')
         for article in data:
             try:
                 print("======================================================")
@@ -251,16 +254,13 @@ def get_user_articles(times, sleeps, cookie, token, signature):
                 item_id = get_item_id(article)
                 article_tmp = {**title, **pushlish_time, **article_type, **tag, **counter, **article_type, **url,
                                **user_info, **item_id, **{'behot_time': article['behot_time']}}
-                if article['behot_time'] > max_behot_time:
-                    max_behot_time = article['behot_time']
                 articles.append(article_tmp)
             except KeyError:
                 print(json.dumps(article, ensure_ascii=False))
                 continue
-
             # print(json.dumps(articles, ensure_ascii=False))
         print(
-            f">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> end {i}, sleep {sleeps}... ")
+            f">>>>>>>>>>>  end {i}, sleep {sleeps}, has_more: {has_more}, max_behot_time: {max_behot_time}... ")
         time.sleep(sleeps)
 
     return articles
@@ -274,7 +274,9 @@ def save_artices_to_mogono(articles, mongo_uri, mongo_db, mongo_collection, dele
         if article['item_id'] is not None and article['_id'] is None:
             collection.replace_one(
                 {'_id': article['item_id']}, article, upsert=True)
-
+        else:
+            collection.replace_one(
+                {'_id': article['_id']}, article, upsert=True)
     ## 删除过期数据
     if delete_old_data:
         current_date = datetime.now()  # 当前日期和时间
