@@ -3,7 +3,7 @@ name: toutiao user crawler
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/5 * * * *"
 
 env:
   TZ: Asia/Shanghai
