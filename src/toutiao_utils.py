@@ -271,10 +271,12 @@ def save_artices_to_mogono(articles, mongo_uri, mongo_db, mongo_collection, dele
     db = client[mongo_db]
     collection = db[mongo_collection]
     for article in articles:
-        if article['_id'] is not None:
+        if '_id' in article:
+            print(f"update article _id: {article['_id']}")
             collection.replace_one(
                 {'_id': article['_id']}, article, upsert=True)
         elif article['item_id'] is not None:
+            print(f"update article item_id: {article['item_id']}")
             collection.replace_one(
                 {'_id': article['item_id']}, article, upsert=True)
             
