@@ -27,4 +27,4 @@ jobs:
 
       - name: run toutiao crawler zfy
         run: |
-          python ./src/toutiao_user_crawler.py --times ${{ vars.CRAWLER_TIMES }} --sleeps ${{ vars.CRAWLER_SLEEPS }} --mongo_url ${{ secrets.MONGO_URL}} --mongo_username ${{ secrets.MONGO_USERNAME}} --mongo_password ${{ secrets.MONGO_PASSWORD}}  
+          python ./src/toutiao_user_crawler.py --mongo_url ${{ secrets.MONGO_URL}} --mongo_username ${{ secrets.MONGO_USERNAME}} --mongo_password ${{ secrets.MONGO_PASSWORD}}  
