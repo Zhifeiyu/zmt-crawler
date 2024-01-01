@@ -30,12 +30,9 @@ if __name__ == "__main__":
     cookie = args.cookie
     token = args.token
     signature = args.signature
-    # mongo_url = args.mongo_url
-    # mongo_username = args.mongo_username
-    # mongo_password = args.mongo_password
-    mongo_url = "cluster0.kjbybut.mongodb.net"
-    mongo_username = "zmt"
-    mongo_password = "SYjL5WNDBAcBbfNR"
+    mongo_url = args.mongo_url
+    mongo_username = args.mongo_username
+    mongo_password = args.mongo_password
     mongo_db = args.mongo_db
     mongo_collection = args.mongo_collection
     
@@ -49,4 +46,4 @@ if __name__ == "__main__":
         article['_id'] = str(article['item_id']) + "-"+ article['collect_time']
     
     mongon_uri = f"mongodb+srv://{mongo_username}:{mongo_password}@{mongo_url}/?retryWrites=true&w=majority"
-    toutiao_utils.save_artices_to_mogono(articles, mongon_uri, mongo_db, mongo_collection, False, 10)
+    toutiao_utils.save_artices_to_mogono(articles, mongon_uri, mongo_db, mongo_collection, False, 30)

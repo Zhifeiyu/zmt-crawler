@@ -271,12 +271,13 @@ def save_artices_to_mogono(articles, mongo_uri, mongo_db, mongo_collection, dele
     db = client[mongo_db]
     collection = db[mongo_collection]
     for article in articles:
-        if article['item_id'] is not None and article['_id'] is None:
-            collection.replace_one(
-                {'_id': article['item_id']}, article, upsert=True)
-        else:
+        if article['_id'] is not None:
             collection.replace_one(
                 {'_id': article['_id']}, article, upsert=True)
+        elif article['item_id'] is not None:
+            collection.replace_one(
+                {'_id': article['item_id']}, article, upsert=True)
+            
     ## 删除过期数据
     if delete_old_data:
         current_date = datetime.now()  # 当前日期和时间
