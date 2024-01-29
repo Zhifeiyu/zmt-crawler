@@ -111,7 +111,7 @@ if __name__ == '__main__':
     parser.add_argument('--mongo_db', type=str, default='zmt_crawler')
     parser.add_argument('--mongo_collection', type=str, default='articles')
     parser.add_argument('--filter', type=str, help='过滤的用户',
-                        default='央视新闻,人民网,新华网,央视网,中国青年网,闽南网,头条段子,人民日报,新华社')
+                        default='央视新闻,人民网,新华网,央视网,中国青年网,闽南网,头条段子,人民日报,新华社,澎湃新闻,环球网')
 
     # 解析命令行参数
     args = parser.parse_args()
